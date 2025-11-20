@@ -228,11 +228,11 @@ class RecoveryAppTester:
             "recipient_id": None  # Broadcast message
         }
         success, details = self.test_endpoint("POST", "messages", self.session_token, message_data, expected_status=401)
-        self.log_test("Create message without valid session", not success, "Expected 401")
+        self.log_test("Create message without valid session (should return 401)", success)
         
         # Test get messages
         success, details = self.test_endpoint("GET", "messages", self.session_token, expected_status=401)
-        self.log_test("Get messages without valid session", not success, "Expected 401")
+        self.log_test("Get messages without valid session (should return 401)", success)
         
         # Test 9: Calendar Events endpoints
         print("\n📅 Testing Calendar Events...")
