@@ -148,7 +148,10 @@ class RecoveryAppTester:
         
         # Test get drug tests (should work for authenticated users)
         success, details = self.test_endpoint("GET", "drug-tests", self.session_token, expected_status=401)
-        self.log_test("Get drug tests without valid session", not success, "Expected 401")
+        if not success and isinstance(details, dict):
+            self.log_test("Get drug tests without valid session", success, f"Expected 401, got {details.get('status')}")
+        else:
+            self.log_test("Get drug tests without valid session", success)
         
         # Test 4: Meetings endpoints
         print("\n🤝 Testing Meetings...")
