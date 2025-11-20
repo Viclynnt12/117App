@@ -217,7 +217,7 @@ class RecoveryAppTester:
         
         # Test get reading materials
         success, details = self.test_endpoint("GET", "reading-materials", self.session_token, expected_status=401)
-        self.log_test("Get reading materials without valid session", not success, "Expected 401")
+        self.log_test("Get reading materials without valid session (should return 401)", success)
         
         # Test 8: Messages endpoints
         print("\n💬 Testing Messages...")
