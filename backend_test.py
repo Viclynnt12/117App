@@ -166,7 +166,7 @@ class RecoveryAppTester:
         
         # Test get meetings
         success, details = self.test_endpoint("GET", "meetings", self.session_token, expected_status=401)
-        self.log_test("Get meetings without valid session", not success, "Expected 401")
+        self.log_test("Get meetings without valid session (should return 401)", success)
         
         # Test 5: Rent Payments endpoints
         print("\n💰 Testing Rent Payments...")
