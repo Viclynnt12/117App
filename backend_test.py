@@ -179,11 +179,11 @@ class RecoveryAppTester:
             "notes": "Test payment"
         }
         success, details = self.test_endpoint("POST", "rent-payments", self.session_token, payment_data, expected_status=401)
-        self.log_test("Create rent payment without valid session", not success, "Expected 401")
+        self.log_test("Create rent payment without valid session (should return 401)", success)
         
         # Test get rent payments
         success, details = self.test_endpoint("GET", "rent-payments", self.session_token, expected_status=401)
-        self.log_test("Get rent payments without valid session", not success, "Expected 401")
+        self.log_test("Get rent payments without valid session (should return 401)", success)
         
         # Test 6: Devotions endpoints
         print("\n📖 Testing Devotions...")
