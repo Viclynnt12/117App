@@ -99,10 +99,12 @@ class RecoveryAppTester:
                 return False, f"Unsupported method: {method}"
             
             success = response.status_code == expected_status
-            return success, {
+            result = {
                 "status": response.status_code,
+                "expected": expected_status,
                 "data": response.json() if response.headers.get('content-type', '').startswith('application/json') else response.text
             }
+            return success, result
         except Exception as e:
             return False, str(e)
 
