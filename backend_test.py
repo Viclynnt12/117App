@@ -199,7 +199,7 @@ class RecoveryAppTester:
         
         # Test get devotions
         success, details = self.test_endpoint("GET", "devotions", self.session_token, expected_status=401)
-        self.log_test("Get devotions without valid session", not success, "Expected 401")
+        self.log_test("Get devotions without valid session (should return 401)", success)
         
         # Test 7: Reading Materials endpoints
         print("\n📚 Testing Reading Materials...")
