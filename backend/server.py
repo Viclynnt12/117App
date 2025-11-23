@@ -184,7 +184,7 @@ class CalendarEventCreate(BaseModel):
     recurrence_pattern: Optional[str] = None  # weekly, monthly
 
 class AdminSettings(BaseModel):
-    model_config = ConfigDict(extra=\"ignore\")
+    model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     expected_rent_amount: float = 0.0
     rent_due_day: int = 1  # day of month
