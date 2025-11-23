@@ -167,7 +167,7 @@ const Messages = () => {
                   <Button
                     data-testid="send-message-button"
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                    className="w-full bg-gray-900 hover:bg-gray-800"
                   >
                     <Send className="w-4 h-4 mr-2" /> Send Message
                   </Button>
