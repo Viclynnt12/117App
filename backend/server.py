@@ -155,12 +155,14 @@ class Message(BaseModel):
     sender_id: str
     recipient_id: Optional[str] = None  # None for broadcast
     content: str
+    mentioned_users: Optional[List[str]] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     read: bool = False
 
 class MessageCreate(BaseModel):
     recipient_id: Optional[str] = None
     content: str
+    mentioned_users: Optional[List[str]] = None
 
 class CalendarEvent(BaseModel):
     model_config = ConfigDict(extra="ignore")
