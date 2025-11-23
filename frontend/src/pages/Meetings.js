@@ -12,12 +12,13 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { format } from 'date-fns';
-import { Plus, Calendar as CalendarIcon } from 'lucide-react';
+import { Plus, Calendar as CalendarIcon, Download, Printer } from 'lucide-react';
 
 const Meetings = () => {
   const { user, API } = useContext(AuthContext);
   const [meetings, setMeetings] = useState([]);
   const [users, setUsers] = useState([]);
+  const [selectedUserId, setSelectedUserId] = useState('');
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     user_id: '',
@@ -29,15 +30,25 @@ const Meetings = () => {
   });
 
   useEffect(() => {
-    loadMeetings();
-    if (user?.role !== 'user') {
-      loadUsers();
+    if (user) {
+      if (user.role === 'admin' || user.role === 'mentor') {
+        loadUsers();
+      } else {
+        setSelectedUserId(user.id);
+      }
     }
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    if (selectedUserId || user?.role === 'user') {
+      loadMeetings();
+    }
+  }, [selectedUserId]);
 
   const loadMeetings = async () => {
     try {
-      const response = await axios.get(`${API}/meetings`, { withCredentials: true });
+      const userId = user?.role === 'user' ? user.id : selectedUserId;
+      const response = await axios.get(`${API}/meetings${userId ? `?user_id=${userId}` : ''}`, { withCredentials: true });
       setMeetings(response.data);
     } catch (error) {
       toast.error('Failed to load meetings');
