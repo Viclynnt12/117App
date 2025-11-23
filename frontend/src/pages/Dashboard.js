@@ -75,7 +75,7 @@ const Dashboard = () => {
           />
         </div>
 
-        <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-none shadow-lg">
+        <Card className="bg-gradient-to-br from-gray-50 to-gray-100 border-none shadow-lg">
           <CardHeader>
             <CardTitle style={{ fontFamily: 'Space Grotesk, sans-serif' }}>Quick Actions</CardTitle>
           </CardHeader>
