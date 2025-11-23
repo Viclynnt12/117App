@@ -121,7 +121,7 @@ const Devotions = () => {
             </Card>
           ) : (
             devotions.map((devotion) => (
-              <Card key={devotion.id} className="bg-gradient-to-br from-purple-50 to-pink-50 border-none shadow-lg hover:shadow-xl transition-all duration-300" data-testid={`devotion-${devotion.id}`}>
+              <Card key={devotion.id} className="bg-gradient-to-br from-gray-50 to-gray-100 border-none shadow-lg hover:shadow-xl transition-all duration-300" data-testid={`devotion-${devotion.id}`}>
                 <CardHeader>
                   <CardTitle className="text-2xl" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                     {devotion.title}
@@ -129,7 +129,7 @@ const Devotions = () => {
                   <div className="flex items-center space-x-4 text-sm text-gray-600" style={{ fontFamily: 'Inter, sans-serif' }}>
                     <span>{format(new Date(devotion.created_at), 'PPP')}</span>
                     {devotion.scripture_reference && (
-                      <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full font-medium">
+                      <span className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full font-medium">
                         {devotion.scripture_reference}
                       </span>
                     )}
