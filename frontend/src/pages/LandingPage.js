@@ -43,12 +43,9 @@ const LandingPage = () => {
           <div className="inline-flex items-center justify-center w-32 h-32 bg-white rounded-2xl mb-6 shadow-lg p-4">
             <img src="https://customer-assets.emergentagent.com/job_b71f59c3-5431-4ca4-99dc-f59377fdb89e/artifacts/p1g6daah_Mark%20117%20Logo%20%282%29.png" alt="117 Discipleship Logo" className="w-full h-full object-contain" />
           </div>
-          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-8" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             1:17 Discipleship
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: 'Inter, sans-serif' }}>
-            Supporting your recovery journey with comprehensive tracking, guidance, and community connection
-          </p>
         </div>
 
         <div className="max-w-4xl mx-auto mb-12">
