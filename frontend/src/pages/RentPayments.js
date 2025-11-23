@@ -84,7 +84,7 @@ const RentPayments = () => {
           {user?.role === 'user' && (
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <Button data-testid="submit-payment-button" className="bg-orange-600 hover:bg-orange-700 rounded-full">
+                <Button data-testid="submit-payment-button" className="bg-gray-900 hover:bg-gray-800 rounded-full">
                   <Plus className="w-4 h-4 mr-2" /> Submit Payment
                 </Button>
               </DialogTrigger>
