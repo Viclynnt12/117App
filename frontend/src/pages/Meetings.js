@@ -58,10 +58,30 @@ const Meetings = () => {
   const loadUsers = async () => {
     try {
       const response = await axios.get(`${API}/users`, { withCredentials: true });
-      setUsers(response.data.filter(u => u.role === 'user'));
+      const regularUsers = response.data.filter(u => u.role === 'user');
+      setUsers(regularUsers);
+      if (regularUsers.length > 0) {
+        setSelectedUserId(regularUsers[0].id);
+      }
     } catch (error) {
       console.error('Failed to load users');
     }
+  };
+
+  const exportCSV = () => {
+    let csv = '1:17 Discipleship - Meetings Report\\n';
+    csv += `Generated: ${format(new Date(), 'PPP')}\\n\\n`;
+    csv += 'Date,Type,Attended,Recorded By,Notes\\n';
+    meetings.forEach(meeting => {
+      csv += `${format(new Date(meeting.meeting_date), 'PP')},${meeting.meeting_type},${meeting.attended ? 'Yes' : 'No'},${meeting.recorded_by},\"${meeting.notes || ''}\"\\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `meetings-${format(new Date(), 'yyyy-MM-dd')}.csv`;
+    a.click();
   };
 
   const handleSubmit = async (e) => {
