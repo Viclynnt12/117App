@@ -187,7 +187,7 @@ const ReadingMaterials = () => {
                               href={material.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-indigo-600 hover:text-indigo-700"
+                              className="text-gray-700 hover:text-gray-900"
                               data-testid={`material-link-${material.id}`}
                             >
                               <ExternalLink className="w-5 h-5" />
