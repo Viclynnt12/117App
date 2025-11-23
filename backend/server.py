@@ -121,6 +121,7 @@ class Devotion(BaseModel):
     title: str
     content: str
     scripture_reference: Optional[str] = None
+    external_links: Optional[List[str]] = None
     author_id: str
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
@@ -128,6 +129,7 @@ class DevotionCreate(BaseModel):
     title: str
     content: str
     scripture_reference: Optional[str] = None
+    external_links: Optional[List[str]] = None
 
 class ReadingMaterial(BaseModel):
     model_config = ConfigDict(extra="ignore")
