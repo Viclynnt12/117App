@@ -76,6 +76,7 @@ function App() {
             <Route path="/reading-materials" element={user ? <ReadingMaterials /> : <Navigate to="/" />} />
             <Route path="/messages" element={user ? <Messages /> : <Navigate to="/" />} />
             <Route path="/calendar" element={user ? <Calendar /> : <Navigate to="/" />} />
+            <Route path="/admin/settings" element={user ? <AdminSettings /> : <Navigate to="/" />} />
           </Routes>
         </BrowserRouter>
         <Toaster position="top-right" />
