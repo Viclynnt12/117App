@@ -53,11 +53,11 @@ const Layout = ({ children }) => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
-                <Heart className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-md p-1">
+                <img src="https://customer-assets.emergentagent.com/job_b71f59c3-5431-4ca4-99dc-f59377fdb89e/artifacts/p1g6daah_Mark%20117%20Logo%20%282%29.png" alt="117 Discipleship Logo" className="w-full h-full object-contain" />
               </div>
               <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-                Journey Connect
+                1:17 Discipleship
               </h1>
             </div>
 
