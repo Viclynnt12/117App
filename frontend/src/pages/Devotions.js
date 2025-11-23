@@ -104,7 +104,7 @@ const Devotions = () => {
                       placeholder="Devotion content..."
                     />
                   </div>
-                  <Button data-testid="submit-devotion-button" type="submit" className="w-full bg-purple-600 hover:bg-purple-700">Post Devotion</Button>
+                  <Button data-testid="submit-devotion-button" type="submit" className="w-full bg-gray-900 hover:bg-gray-800">Post Devotion</Button>
                 </form>
               </DialogContent>
             </Dialog>
