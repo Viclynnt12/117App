@@ -101,6 +101,7 @@ class RentPayment(BaseModel):
     confirmed_by: Optional[str] = None
     confirmation_date: Optional[datetime] = None
     notes: Optional[str] = None
+    image_url: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class RentPaymentCreate(BaseModel):
@@ -108,6 +109,7 @@ class RentPaymentCreate(BaseModel):
     payment_date: str
     amount: float
     notes: Optional[str] = None
+    image_url: Optional[str] = None
 
 class RentPaymentConfirm(BaseModel):
     confirmed: bool
