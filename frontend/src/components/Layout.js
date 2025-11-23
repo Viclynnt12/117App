@@ -63,7 +63,7 @@ const Layout = ({ children }) => {
 
             {/* Desktop Menu */}
             <nav className="hidden lg:flex items-center space-x-1">
-              {menuItems.map((item) => {
+              {allMenuItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
                 return (
