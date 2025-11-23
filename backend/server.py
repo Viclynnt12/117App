@@ -172,6 +172,9 @@ class CalendarEvent(BaseModel):
     event_date: datetime
     event_type: str
     location: Optional[str] = None
+    leader: Optional[str] = None
+    is_recurring: bool = False
+    recurrence_pattern: Optional[str] = None
     created_by: str
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
