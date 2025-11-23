@@ -150,7 +150,7 @@ const ReadingMaterials = () => {
                       placeholder="https://..."
                     />
                   </div>
-                  <Button data-testid="submit-material-button" type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700">Add Material</Button>
+                  <Button data-testid="submit-material-button" type="submit" className="w-full bg-gray-900 hover:bg-gray-800">Add Material</Button>
                 </form>
               </DialogContent>
             </Dialog>
