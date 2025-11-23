@@ -86,7 +86,7 @@ const Meetings = () => {
           {user?.role !== 'user' && (
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <Button data-testid="add-meeting-button" className="bg-green-600 hover:bg-green-700 rounded-full">
+                <Button data-testid="add-meeting-button" className="bg-gray-900 hover:bg-gray-800 rounded-full">
                   <Plus className="w-4 h-4 mr-2" /> Record Meeting
                 </Button>
               </DialogTrigger>
@@ -161,7 +161,7 @@ const Meetings = () => {
                       placeholder="Meeting notes, observations, or feedback..."
                     />
                   </div>
-                  <Button data-testid="submit-meeting-button" type="submit" className="w-full bg-green-600 hover:bg-green-700">Record Meeting</Button>
+                  <Button data-testid="submit-meeting-button" type="submit" className="w-full bg-gray-900 hover:bg-gray-800">Record Meeting</Button>
                 </form>
               </DialogContent>
             </Dialog>
@@ -184,7 +184,7 @@ const Meetings = () => {
                     <div className="space-y-2 flex-1">
                       <div className="flex items-center space-x-3">
                         <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                          meeting.attended ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                          meeting.attended ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'
                         }`}>
                           {meeting.attended ? 'ATTENDED' : 'ABSENT'}
                         </span>
