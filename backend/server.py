@@ -350,6 +350,30 @@ async def update_user_role(
     await db.users.update_one({"id": user_id}, {"$set": {"role": role}})
     return {"message": "Role updated"}
 
+# File upload
+@api_router.post("/upload")
+async def upload_file(
+    file: UploadFile = File(...),
+    session_token: Optional[str] = Cookie(None),
+    authorization: Optional[str] = Header(None)
+):
+    user = await get_current_user(session_token, authorization)
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    # Generate unique filename
+    file_ext = Path(file.filename).suffix
+    filename = f"{uuid.uuid4()}{file_ext}"
+    file_path = UPLOAD_DIR / filename
+    
+    # Save file
+    contents = await file.read()
+    with open(file_path, "wb") as f:
+        f.write(contents)
+    
+    # Return URL
+    return {"url": f"/uploads/{filename}"}
+
 # Drug tests
 @api_router.post("/drug-tests", response_model=DrugTest)
 async def create_drug_test(
