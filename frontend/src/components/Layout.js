@@ -39,7 +39,13 @@ const Layout = ({ children }) => {
     { path: '/reading-materials', label: 'Reading', icon: BookMarked },
     { path: '/messages', label: 'Messages', icon: MessageCircle },
     { path: '/calendar', label: 'Calendar', icon: CalendarDays },
-  ];\n\n  const adminMenuItems = user?.role === 'admin' ? [\n    { path: '/admin/settings', label: 'Settings', icon: Menu }\n  ] : [];\n\n  const allMenuItems = [...menuItems, ...adminMenuItems];
+  ];
+
+  const adminMenuItems = user?.role === 'admin' ? [
+    { path: '/admin/settings', label: 'Settings', icon: Menu }
+  ] : [];
+
+  const allMenuItems = [...menuItems, ...adminMenuItems];
 
   const handleLogout = async () => {
     await logout();
