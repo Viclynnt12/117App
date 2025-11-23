@@ -175,6 +175,53 @@ class CalendarEventCreate(BaseModel):
     event_date: str
     event_type: str
     location: Optional[str] = None
+    leader: Optional[str] = None
+    is_recurring: bool = False
+    recurrence_pattern: Optional[str] = None  # weekly, monthly
+
+class AdminSettings(BaseModel):
+    model_config = ConfigDict(extra=\"ignore\")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    expected_rent_amount: float = 0.0
+    rent_due_day: int = 1  # day of month
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class AdminSettingsUpdate(BaseModel):
+    expected_rent_amount: Optional[float] = None
+    rent_due_day: Optional[int] = None
+
+class DevotionLink(BaseModel):
+    model_config = ConfigDict(extra=\"ignore\")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str
+    url: str
+    category: str  # admin_added, recovery_resource
+    added_by: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class DevotionLinkCreate(BaseModel):
+    title: str
+    url: str
+    category: str
+
+class EventRequest(BaseModel):
+    model_config = ConfigDict(extra=\"ignore\")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    title: str
+    description: Optional[str] = None
+    event_date: str
+    event_type: str
+    location: Optional[str] = None
+    status: str = \"pending\"  # pending, approved, rejected
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class EventRequestCreate(BaseModel):
+    title: str
+    description: Optional[str] = None
+    event_date: str
+    event_type: str
+    location: Optional[str] = None
 
 # Auth helper
 async def get_current_user(session_token: Optional[str] = None, authorization: Optional[str] = None) -> Optional[User]:
