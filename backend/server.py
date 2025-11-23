@@ -239,7 +239,15 @@ async def get_current_user(session_token: Optional[str] = None, authorization: O
         return None
     
     session = await db.user_sessions.find_one({"session_token": token})
-    if not session or datetime.fromisoformat(session['expires_at']) < datetime.now(timezone.utc):
+    if not session:
+        return None
+    
+    # Handle both datetime objects and ISO strings
+    expires_at = session['expires_at']
+    if isinstance(expires_at, str):
+        expires_at = datetime.fromisoformat(expires_at)
+    
+    if expires_at < datetime.now(timezone.utc):
         return None
     
     user_doc = await db.users.find_one({"id": session["user_id"]})
