@@ -53,25 +53,25 @@ const Dashboard = () => {
             title="Drug Tests"
             value={stats.drugTests}
             icon={<ClipboardCheck className="w-6 h-6" />}
-            color="from-blue-500 to-cyan-500"
+            color="from-gray-800 to-gray-900"
           />
           <StatCard
             title="Meetings Attended"
             value={stats.meetings}
             icon={<Calendar className="w-6 h-6" />}
-            color="from-green-500 to-emerald-500"
+            color="from-gray-700 to-gray-800"
           />
           <StatCard
             title="Payments Confirmed"
             value={stats.payments}
             icon={<DollarSign className="w-6 h-6" />}
-            color="from-orange-500 to-amber-500"
+            color="from-gray-600 to-gray-700"
           />
           <StatCard
             title="Devotions Available"
             value={stats.devotions}
             icon={<BookOpen className="w-6 h-6" />}
-            color="from-purple-500 to-pink-500"
+            color="from-gray-800 to-gray-900"
           />
         </div>
 
