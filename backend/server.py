@@ -630,6 +630,146 @@ async def mark_message_read(
     await db.messages.update_one({"id": message_id}, {"$set": {"read": True}})
     return {"message": "Marked as read"}
 
+# Admin settings
+@api_router.get("/admin/settings")
+async def get_admin_settings(
+    session_token: Optional[str] = Cookie(None),
+    authorization: Optional[str] = Header(None)
+):
+    user = await get_current_user(session_token, authorization)
+    if not user or user.role != "admin":
+        raise HTTPException(status_code=403, detail="Admin only")
+    
+    settings = await db.admin_settings.find_one({})
+    if not settings:
+        # Create default settings
+        default_settings = {
+            "id": str(uuid.uuid4()),
+            "expected_rent_amount": 0.0,
+            "rent_due_day": 1,
+            "updated_at": datetime.now(timezone.utc).isoformat()
+        }
+        await db.admin_settings.insert_one(default_settings)
+        return default_settings
+    return settings
+
+@api_router.patch("/admin/settings")
+async def update_admin_settings(
+    data: AdminSettingsUpdate,
+    session_token: Optional[str] = Cookie(None),
+    authorization: Optional[str] = Header(None)
+):
+    user = await get_current_user(session_token, authorization)
+    if not user or user.role != "admin":
+        raise HTTPException(status_code=403, detail="Admin only")
+    
+    update_data = {k: v for k, v in data.model_dump().items() if v is not None}
+    update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+    
+    await db.admin_settings.update_one({}, {"$set": update_data}, upsert=True)
+    return {"message": "Settings updated"}
+
+# Devotion links
+@api_router.post("/devotion-links")
+async def create_devotion_link(
+    data: DevotionLinkCreate,
+    session_token: Optional[str] = Cookie(None),
+    authorization: Optional[str] = Header(None)
+):
+    user = await get_current_user(session_token, authorization)
+    if not user or user.role != "admin":
+        raise HTTPException(status_code=403, detail="Admin only")
+    
+    link_dict = data.model_dump()
+    link_dict["added_by"] = user.id
+    link_obj = DevotionLink(**link_dict)
+    doc = link_obj.model_dump()
+    doc["created_at"] = doc["created_at"].isoformat()
+    
+    await db.devotion_links.insert_one(doc)
+    return link_obj
+
+@api_router.get("/devotion-links")
+async def get_devotion_links(
+    session_token: Optional[str] = Cookie(None),
+    authorization: Optional[str] = Header(None)
+):
+    user = await get_current_user(session_token, authorization)
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    links = await db.devotion_links.find({}, {"_id": 0}).to_list(1000)
+    return links
+
+# Event requests
+@api_router.post("/event-requests")
+async def create_event_request(
+    data: EventRequestCreate,
+    session_token: Optional[str] = Cookie(None),
+    authorization: Optional[str] = Header(None)
+):
+    user = await get_current_user(session_token, authorization)
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    
+    request_dict = data.model_dump()
+    request_dict["user_id"] = user.id
+    request_dict["status"] = "pending"
+    request_obj = EventRequest(**request_dict)
+    doc = request_obj.model_dump()
+    doc["created_at"] = doc["created_at"].isoformat()
+    
+    await db.event_requests.insert_one(doc)
+    return request_obj
+
+@api_router.get("/event-requests")
+async def get_event_requests(
+    session_token: Optional[str] = Cookie(None),
+    authorization: Optional[str] = Header(None)
+):
+    user = await get_current_user(session_token, authorization)
+    if not user or user.role not in ["admin", "mentor"]:
+        raise HTTPException(status_code=403, detail="Not authorized")
+    
+    requests = await db.event_requests.find({}, {"_id": 0}).to_list(1000)
+    return requests
+
+@api_router.patch("/event-requests/{request_id}/approve")
+async def approve_event_request(
+    request_id: str,
+    session_token: Optional[str] = Cookie(None),
+    authorization: Optional[str] = Header(None)
+):
+    user = await get_current_user(session_token, authorization)
+    if not user or user.role not in ["admin", "mentor"]:
+        raise HTTPException(status_code=403, detail="Not authorized")
+    
+    request = await db.event_requests.find_one({"id": request_id})
+    if not request:
+        raise HTTPException(status_code=404, detail="Request not found")
+    
+    # Create calendar event
+    event_dict = {
+        "title": request["title"],
+        "description": request.get("description"),
+        "event_date": request["event_date"],
+        "event_type": request["event_type"],
+        "location": request.get("location"),
+        "created_by": user.id
+    }
+    event_obj = CalendarEvent(**event_dict)
+    doc = event_obj.model_dump()
+    doc["created_at"] = doc["created_at"].isoformat()
+    await db.calendar_events.insert_one(doc)
+    
+    # Update request status
+    await db.event_requests.update_one(
+        {"id": request_id},
+        {"$set": {"status": "approved"}}
+    )
+    
+    return {"message": "Request approved and event created"}
+
 # Calendar events
 @api_router.post("/calendar-events", response_model=CalendarEvent)
 async def create_calendar_event(
@@ -649,6 +789,24 @@ async def create_calendar_event(
     doc["created_at"] = doc["created_at"].isoformat()
     
     await db.calendar_events.insert_one(doc)
+    
+    # Handle recurring events
+    if event_dict.get("is_recurring") and event_dict.get("recurrence_pattern"):
+        # Create next 12 occurrences
+        base_date = datetime.fromisoformat(event_dict["event_date"])
+        for i in range(1, 13):
+            if event_dict["recurrence_pattern"] == "weekly":
+                next_date = base_date + timedelta(weeks=i)
+            elif event_dict["recurrence_pattern"] == "monthly":
+                next_date = base_date + timedelta(days=30*i)
+            else:
+                break
+            
+            recurring_event = event_obj.model_dump()
+            recurring_event["id"] = str(uuid.uuid4())
+            recurring_event["event_date"] = next_date.isoformat()
+            await db.calendar_events.insert_one(recurring_event)
+    
     return event_obj
 
 @api_router.get("/calendar-events", response_model=List[CalendarEvent])
