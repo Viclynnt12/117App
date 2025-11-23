@@ -65,7 +65,7 @@ const Devotions = () => {
           {user?.role === 'admin' && (
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <Button data-testid="add-devotion-button" className="bg-purple-600 hover:bg-purple-700 rounded-full">
+                <Button data-testid="add-devotion-button" className="bg-gray-900 hover:bg-gray-800 rounded-full">
                   <Plus className="w-4 h-4 mr-2" /> Post Devotion
                 </Button>
               </DialogTrigger>
