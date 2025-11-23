@@ -195,7 +195,7 @@ class AdminSettingsUpdate(BaseModel):
     rent_due_day: Optional[int] = None
 
 class DevotionLink(BaseModel):
-    model_config = ConfigDict(extra=\"ignore\")
+    model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     title: str
     url: str
