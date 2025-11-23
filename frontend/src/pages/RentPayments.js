@@ -125,7 +125,7 @@ const RentPayments = () => {
                       placeholder="Payment method, reference number, etc..."
                     />
                   </div>
-                  <Button data-testid="submit-payment-form-button" type="submit" className="w-full bg-orange-600 hover:bg-orange-700">Submit for Confirmation</Button>
+                  <Button data-testid="submit-payment-form-button" type="submit" className="w-full bg-gray-900 hover:bg-gray-800">Submit for Confirmation</Button>
                 </form>
               </DialogContent>
             </Dialog>
