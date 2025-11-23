@@ -103,7 +103,7 @@ const Messages = () => {
                       >
                         <div className={`max-w-[70%] ${
                           isOwnMessage
-                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
+                            ? 'bg-gray-900 text-white'
                             : 'bg-gray-100 text-gray-900'
                         } rounded-2xl px-4 py-3 shadow-md`}>
                           {!isOwnMessage && (
