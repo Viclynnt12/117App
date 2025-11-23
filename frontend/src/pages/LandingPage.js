@@ -37,7 +37,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-white">
       <div className="container mx-auto px-6 py-12">
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-32 h-32 bg-white rounded-2xl mb-6 shadow-lg p-4">
@@ -78,7 +78,7 @@ const LandingPage = () => {
             data-testid="login-button"
             onClick={handleLogin}
             size="lg"
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-6 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-6 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
           >
             Sign In with Google
           </Button>
@@ -89,9 +89,9 @@ const LandingPage = () => {
 };
 
 const FeatureCard = ({ icon, title, description }) => (
-  <div className="bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-blue-100">
+  <div className="bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200">
     <div className="flex items-start space-x-4">
-      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md">
+      <div className="flex-shrink-0 w-12 h-12 bg-gray-900 rounded-xl flex items-center justify-center text-white shadow-md">
         {icon}
       </div>
       <div>

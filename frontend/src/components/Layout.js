@@ -47,9 +47,9 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-white">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-blue-100">
+      <header className="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-gray-200">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
@@ -72,8 +72,8 @@ const Layout = ({ children }) => {
                     onClick={() => navigate(item.path)}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-200 ${
                       isActive
-                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                        : 'text-gray-700 hover:bg-blue-50'
+                        ? 'bg-gray-900 text-white shadow-md'
+                        : 'text-gray-700 hover:bg-gray-100'
                     }`}
                     style={{ fontFamily: 'Inter, sans-serif' }}
                   >
@@ -88,9 +88,9 @@ const Layout = ({ children }) => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-                    <Avatar className="w-10 h-10 border-2 border-blue-500">
+                    <Avatar className="w-10 h-10 border-2 border-gray-900">
                       <AvatarImage src={user?.picture} />
-                      <AvatarFallback className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
+                      <AvatarFallback className="bg-gray-900 text-white">
                         {user?.name?.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
@@ -113,7 +113,7 @@ const Layout = ({ children }) => {
 
               {/* Mobile Menu Button */}
               <button
-                className="lg:hidden p-2 hover:bg-blue-50 rounded-lg transition-colors"
+                className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -125,7 +125,7 @@ const Layout = ({ children }) => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-lg">
+        <div className="lg:hidden bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-lg">
           <nav className="container mx-auto px-6 py-4 space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
@@ -139,8 +139,8 @@ const Layout = ({ children }) => {
                   }}
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                     isActive
-                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                      : 'text-gray-700 hover:bg-blue-50'
+                      ? 'bg-gray-900 text-white shadow-md'
+                      : 'text-gray-700 hover:bg-gray-100'
                   }`}
                   style={{ fontFamily: 'Inter, sans-serif' }}
                 >
