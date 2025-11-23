@@ -40,11 +40,11 @@ const LandingPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-100">
       <div className="container mx-auto px-6 py-12">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl mb-6 shadow-lg">
-            <Heart className="w-10 h-10 text-white" />
+          <div className="inline-flex items-center justify-center w-32 h-32 bg-white rounded-2xl mb-6 shadow-lg p-4">
+            <img src="https://customer-assets.emergentagent.com/job_b71f59c3-5431-4ca4-99dc-f59377fdb89e/artifacts/p1g6daah_Mark%20117%20Logo%20%282%29.png" alt="117 Discipleship Logo" className="w-full h-full object-contain" />
           </div>
           <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-            Journey Connect
+            1:17 Discipleship
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto" style={{ fontFamily: 'Inter, sans-serif' }}>
             Supporting your recovery journey with comprehensive tracking, guidance, and community connection
