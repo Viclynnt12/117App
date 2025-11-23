@@ -111,7 +111,7 @@ const StatCard = ({ title, value, icon, color }) => (
 const QuickActionButton = ({ href, label }) => (
   <a
     href={href}
-    className="block p-4 bg-white rounded-xl hover:bg-blue-50 transition-colors duration-200 text-center font-medium text-gray-700 hover:text-blue-600 shadow-sm hover:shadow-md"
+    className="block p-4 bg-white rounded-xl hover:bg-gray-100 transition-colors duration-200 text-center font-medium text-gray-700 hover:text-gray-900 shadow-sm hover:shadow-md"
     style={{ fontFamily: 'Inter, sans-serif' }}
   >
     {label}
