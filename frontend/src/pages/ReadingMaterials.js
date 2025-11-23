@@ -88,7 +88,7 @@ const ReadingMaterials = () => {
           {user?.role !== 'user' && (
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <Button data-testid="add-material-button" className="bg-indigo-600 hover:bg-indigo-700 rounded-full">
+                <Button data-testid="add-material-button" className="bg-gray-900 hover:bg-gray-800 rounded-full">
                   <Plus className="w-4 h-4 mr-2" /> Add Material
                 </Button>
               </DialogTrigger>
