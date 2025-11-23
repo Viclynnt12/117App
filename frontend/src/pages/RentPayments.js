@@ -178,7 +178,7 @@ const RentPayments = () => {
                           data-testid={`confirm-payment-${payment.id}`}
                           size="sm"
                           onClick={() => handleConfirm(payment.id, true)}
-                          className="bg-green-600 hover:bg-green-700"
+                          className="bg-gray-800 hover:bg-gray-700"
                         >
                           <Check className="w-4 h-4" />
                         </Button>
