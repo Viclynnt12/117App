@@ -113,7 +113,32 @@ const Meetings = () => {
               Meeting Attendance
             </h1>
             <p className="text-gray-600 mt-2" style={{ fontFamily: 'Inter, sans-serif' }}>Track meeting attendance and notes</p>
+            {(user?.role === 'admin' || user?.role === 'mentor') && (
+              <div className="mt-4">
+                <Select value={selectedUserId} onValueChange={setSelectedUserId}>
+                  <SelectTrigger className="w-64">
+                    <SelectValue placeholder="Select user" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {users.map(u => (
+                      <SelectItem key={u.id} value={u.id}>{u.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
           </div>
+          <div className="flex space-x-2">
+            {(user?.role === 'admin' || user?.role === 'mentor') && (
+              <>
+                <Button onClick={exportCSV} variant="outline">
+                  <Download className="w-4 h-4 mr-2" /> Export CSV
+                </Button>
+                <Button onClick={() => window.print()} variant="outline">
+                  <Printer className="w-4 h-4 mr-2" /> Print
+                </Button>
+              </>
+            )}
           {user?.role !== 'user' && (
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
