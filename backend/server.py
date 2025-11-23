@@ -60,6 +60,7 @@ class DrugTest(BaseModel):
     result: str  # negative, positive, dilute, invalid
     administered_by: str
     notes: Optional[str] = None
+    image_url: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class DrugTestCreate(BaseModel):
@@ -69,6 +70,7 @@ class DrugTestCreate(BaseModel):
     result: str
     administered_by: str
     notes: Optional[str] = None
+    image_url: Optional[str] = None
 
 class Meeting(BaseModel):
     model_config = ConfigDict(extra="ignore")
