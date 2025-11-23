@@ -127,7 +127,7 @@ const Layout = ({ children }) => {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-lg">
           <nav className="container mx-auto px-6 py-4 space-y-2">
-            {menuItems.map((item) => {
+            {allMenuItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
               return (
