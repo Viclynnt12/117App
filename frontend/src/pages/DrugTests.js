@@ -95,7 +95,7 @@ const DrugTests = () => {
           {user?.role !== 'user' && (
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <Button data-testid="add-drug-test-button" className="bg-blue-600 hover:bg-blue-700 rounded-full">
+                <Button data-testid="add-drug-test-button" className="bg-gray-900 hover:bg-gray-800 rounded-full">
                   <Plus className="w-4 h-4 mr-2" /> Add Test
                 </Button>
               </DialogTrigger>
